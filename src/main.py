@@ -4,8 +4,9 @@ import requests
 from simple_term_menu import TerminalMenu
 from prettytable import PrettyTable
 import functions
-import pixelart
-
+import colorama
+from colorama import Fore, Back, Style
+colorama.init(autoreset=True)
 
 base_url = 'http://api.openweathermap.org/data/2.5/weather?'
 api_key = 'f820095e8faeb3eb39572008bae7a59c'
@@ -60,7 +61,34 @@ x.field_names = ['City Name', 'Weather Description', 'Cloud Cover (%)', 'Cloud B
 x.add_row([city, weather_description, cloud_cover_percent, cloud_base, ice_present, f"Try to fly below {cloud_base}, or above {alt_rime}"])
 print(x)
 
-pixelart.visial_output()
+print('Here is a visual output of the potential icing zones higlighted in red:')
+
+def visual_output():
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░Low Risk of icing░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED} █░░░░░░░░░░Rime Ice at max {alt_rime} feet░░░░░░░░█-20C')
+    print(f'{Fore.RED} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED}A█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED}L█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED}T█░░░░░░░░░░░Mixed Ice at max {alt_mixed} feet░░░░░░░░░█-15C')
+    print(f'{Fore.RED}I█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED}T█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED}U█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED}D█░░░░░░░░░Clear Ice at max {alt_clear} feet░░░░░░░░░█-10C')
+    print(f'{Fore.RED}U█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED}E█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.RED} █░░░░░░░░░Cloud base at {cloud_base} feet░░░░░░░░█ 0C')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░No risk of icing░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    
+visual_output()
 
 
 
