@@ -4,6 +4,7 @@ import requests
 from simple_term_menu import TerminalMenu
 from prettytable import PrettyTable
 import functions
+import pixelart
 
 
 base_url = 'http://api.openweathermap.org/data/2.5/weather?'
@@ -46,7 +47,7 @@ def ice_type():
             print(hazard)
 
 
-if weather_description != "clear sky" and cloud_base_temp <= 0:
+if weather_description != "clear sky":
     ice_present = 'Yes'
 else:
     ice_present = 'No'
@@ -56,15 +57,16 @@ print(ground_temp, cloud_base_temp, cloud_base, alt_clear, alt_mixed, alt_rime)
 
 x = PrettyTable()
 x.field_names = ['City Name', 'Weather Description', 'Cloud Cover (%)', 'Cloud Base (ft)', 'Ice Present', 'Ice-free Flying Altitude']
-x.add_row([city, weather_description, cloud_cover_percent, cloud_base, ice_present, f"It is safe to fly below {cloud_base}, or above {alt_rime}"])
+x.add_row([city, weather_description, cloud_cover_percent, cloud_base, ice_present, f"Try to fly below {cloud_base}, or above {alt_rime}"])
 print(x)
+
+pixelart.visial_output()
 
 
 
 fly_today = input('Are you happy to fly today? (yes/no) ')
 if fly_today == 'yes' and ice_present == 'yes':
     print('Enjoy your flight, but watch out for ice!')
-    print('')
 elif fly_today == 'yes' and ice_present == 'no':
     print('Enjoy your flight, the weather appears to be clear!')
 elif fly_today == 'no':
