@@ -5,7 +5,7 @@ from simple_term_menu import TerminalMenu
 from prettytable import PrettyTable
 import functions
 import colorama
-from colorama import Fore, Back, Style
+from colorama import Fore
 colorama.init(autoreset=True)
 
 base_url = 'http://api.openweathermap.org/data/2.5/weather?'
@@ -15,11 +15,9 @@ url = base_url + '&appid=' + api_key + '&q=' + city + '&units=imperial'
 response = requests.get(url).json()
 
 if response['cod'] == '404':
-    city = input('That city is not available, please try again: ')
+    city = input('That is not a city, please try again: ')
     url = base_url + '&appid=' + api_key + '&q=' + city + '&units=imperial'
     response = requests.get(url).json()
-
-
 
 ground_temp = functions.f_to_c(response['main']['temp'])
 weather_description = response['weather'][0]['description']
@@ -32,38 +30,48 @@ alt_clear = "{:.2f}".format((10 + ground_temp) / 0.00984)
 alt_mixed = "{:.2f}".format((15 + ground_temp) / 0.00984)
 alt_rime = "{:.2f}".format((20 + ground_temp) / 0.00984)
 
-flying_altitude = 2500
-
-
-def ice_type():
-    if weather_description != "clear sky" and cloud_base_temp <= 0:
-        if cloud_base <= flying_altitude and flying_altitude < alt_clear:
-            hazard = 'Clear Ice'
-            print(hazard)
-        elif alt_clear <= flying_altitude < alt_mixed:
-            hazard = 'Mixed Ice'
-            print(hazard)
-        elif alt_mixed <= flying_altitude < alt_rime:
-            hazard = 'Rime Ice'
-            print(hazard)
-
-
 if weather_description != "clear sky":
     ice_present = 'Yes'
+    safe_zone = f'Safe to fly below {cloud_base}, or above {alt_rime}'
 else:
     ice_present = 'No'
-
+    safe_zone = 'There is no potential for icing!'
 
 print(ground_temp, cloud_base_temp, cloud_base, alt_clear, alt_mixed, alt_rime)
 
+
 x = PrettyTable()
 x.field_names = ['City Name', 'Weather Description', 'Cloud Cover (%)', 'Cloud Base (ft)', 'Ice Present', 'Ice-free Flying Altitude']
-x.add_row([city, weather_description, cloud_cover_percent, cloud_base, ice_present, f"Try to fly below {cloud_base}, or above {alt_rime}"])
+x.add_row([city, weather_description, cloud_cover_percent, cloud_base, ice_present, safe_zone])
 print(x)
 
-print('Here is a visual output of the potential icing zones higlighted in red:')
-
-def visual_output():
+if ice_present == 'No':
+    print('Here is a visual output of the potential icing zones higlighted in red:')
+    print('-----------------------------------------------------------------------')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░No ice at any flying altitude!░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+else:
+    print('Here is a visual output of the potential icing zones higlighted in red:')
+    print('-----------------------------------------------------------------------')
     print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
     print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
     print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░Low Risk of icing░░░░░░░░░░░░░░░░░░░█')
@@ -84,31 +92,31 @@ def visual_output():
     print(f'{Fore.RED} █░░░░░░░░░Cloud base at {cloud_base} feet░░░░░░░░█ 0C')
     print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
     print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
-    print(f'{Fore.GREEN} █░░░░░░░░░░░No risk of icing░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
+    print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░No risk of icing░░░░░░░░░░░░░░░░░░░░█')
     print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
     print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
-    
-visual_output()
 
-
-
-fly_today = input('Are you happy to fly today? (yes/no) ')
-if fly_today == 'yes' and ice_present == 'yes':
-    print('Enjoy your flight, but watch out for ice!')
-elif fly_today == 'yes' and ice_present == 'no':
-    print('Enjoy your flight, the weather appears to be clear!')
-elif fly_today == 'no':
-    def day():
-        print("This is the forecast for the next week, when would you like to fly?")
-        options = [str(dt.date.today() + dt.timedelta(days=1)), str(dt.date.today() + dt.timedelta(days=2)), str(dt.date.today() + dt.timedelta(days=3)), str(dt.date.today() + dt.timedelta(days=4)), str(dt.date.today() + dt.timedelta(days=5)), str(dt.date.today() + dt.timedelta(days=6)), str(dt.date.today() + dt.timedelta(days=7))]
-        terminal_menu = TerminalMenu(options)
-        menu_entry_index = terminal_menu.show()
-        print(f"You have selected {options[menu_entry_index]}!")
-    if __name__ == "__day__":
-        day()
-
-# forecast_url = 'http://api.openweathermap.org/data/2.5/forecast?'
-# api_key = 'f820095e8faeb3eb39572008bae7a59c'
-# url = forecast_url + '&appid=' + api_key + '&q=' + city + '&units=imperial'
-# response = requests.get(url).json()
-# print(response)
+def menu():
+    options = ['Information on Icing', 'Try another City', 'Exit']
+    submenu_options = ['Clear Ice', 'Mixed Ice', 'Rime Ice']
+    main_menu = TerminalMenu(options)
+    quitting = False
+while quitting == False:
+    menu_entry_index = main_menu.show()
+    selection = options(main_entry_index)
+    if selection == 'Exit':
+        quitting = True
+    if selection == 'Information on Icing':
+        print("Clear Ice:")
+        print('Clear ice is formed by supercooled large water droplets that mostly occur in the temperature range from 0 C to -10 C. The ice itself freezes slowly upon impact forming a smooth sheet of transparent ice.')
+        print('Because the droplets are large, as they freeze, they spread over the surface, combining with other droplets, forming a solid surface. There are no air bubbles to weaken the structure of the ice layer.')
+        print('As more ice accumulates, it developes ridges which pose a large risk of causing issues to aerodynamic and instrument performance with up to a 500% increase in drag. It\'s thickness also makes it more difficult to remove using de-icing equipment.')
+        print('Rime Ice:')
+        print('Rime ice is a type of ice that occurs in the coldest conditions, usually below -15C. Rime ice is opaque or milky/white ice that occurs commonly in stratiform clouds. The supercooled water droplets ')
+        print('that form with rime ice are much smaller than that of clear ice. This means the droplets maintain the sperical shapes as they freeze without much spreading.')
+        print('Mixed Ice:')
+        print('Mixed ice is the most common type of ice that may occur due to the varying nature of droplet sizes within a cloud. This type of ice is most commonly found in temperatures ranging from -10C to -15C.')
+        print('')
+        break
+    if selection == 'Try another City':
+        break
