@@ -58,7 +58,6 @@ while quitting == False:
             city = input('That didn\'t work, please try again: ')
             url = base_url + '&appid=' + api_key + '&q=' + city + '&units=imperial'
             response = requests.get(url).json()
-        print(response)
 
         ground_temp = functions.f_to_c(response['main']['temp'])
         weather_description = response['weather'][0]['description']
