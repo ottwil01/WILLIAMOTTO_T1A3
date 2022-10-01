@@ -18,21 +18,21 @@ The app works by pulling live weather data from an API, and uses that data to de
 1. Install python using the following [link](https://www.python.org/)
 
 2. Clone the repo
-'''
+```
 git clone https://github.com/ottwil01/WILLIAMOTTO_T1A3
-'''
+```
 4. Change to the src directory
-'''
+```
 cd src
-'''
+```
 5. Run the app by executing the following command
-'''
+```
 ./Weather_App
-'''
+```
 6. As an alternative, try the following command
-'''
+```
 python3 main.py
-'''
+```
 # Tests
 
 # Log
