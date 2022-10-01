@@ -8,7 +8,7 @@ import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
 
-options = ['Choose A City', 'Information on Icing', 'Request Forecast' 'Exit']
+options = ['Choose A City', 'Request Forecast', 'Information on Icing', 'Exit']
 submenu_options = ['Clear Ice', 'Rime Ice', 'Mixed Ice', 'Return to main menu']
 submenu = TerminalMenu(submenu_options)
 main_menu = TerminalMenu(options)
@@ -109,6 +109,7 @@ while quitting == False:
             print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
             print('')
             input('Press enter to continue.')
+            clearing.clear()
             continue
         else:
             print('Here is a visual output of the potential icing zones higlighted in red:')
@@ -138,6 +139,7 @@ while quitting == False:
             print(f'{Fore.GREEN} █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█')
             print('')
             input('Press enter to continue.')
+            clearing.clear()
             continue
     if selection == 'Request Forecast':
             forecast_base_url = 'https://api.openweathermap.org/data/2.5/forecast?'
@@ -159,7 +161,7 @@ while quitting == False:
             forecast.add_row([forecast_city, datetime.datetime.now() + datetime.timedelta(3), weather_description, cloud_cover_percent, cloud_base, ice_present, safe_zone])
             forecast.add_row([forecast_city, datetime.datetime.now() + datetime.timedelta(4), weather_description, cloud_cover_percent, cloud_base, ice_present, safe_zone])
             forecast.add_row([forecast_city, datetime.datetime.now() + datetime.timedelta(5), weather_description, cloud_cover_percent, cloud_base, ice_present, safe_zone])
-            print(forecast)
+            # print(forecast)
                     
             ground_temp = functions.f_to_c(forecast_response['main']['temp'])
             weather_description = forecast_response['weather'][0]['description']
@@ -173,4 +175,5 @@ while quitting == False:
             alt_rime = int(cloud_base + 10000)
             print('')
             input('Press enter to continue.')
+            clearing.clear()
             continue
