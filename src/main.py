@@ -8,7 +8,7 @@ import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
 
-options = ['Choose A City', 'Request Forecast', 'Information on Icing', 'Exit']
+options = ['Choose A City', 'Request 5-day Forecast', 'Information on Icing', 'Exit']
 submenu_options = ['Clear Ice', 'Rime Ice', 'Mixed Ice', 'Return to main menu']
 submenu = TerminalMenu(submenu_options)
 main_menu = TerminalMenu(options)
@@ -29,22 +29,19 @@ while quitting == False:
             clearing.clear()
             continue
         elif submenu_selection == 'Clear Ice':
-            print('Clear ice is formed by supercooled large water droplets that mostly occur in the temperature range from 0 C to -10 C. The ice itself freezes slowly upon impact forming a smooth sheet of transparent ice.')
-            print('Because the droplets are large, as they freeze, they spread over the surface, combining with other droplets, forming a solid surface. There are no air bubbles to weaken the structure of the ice layer.')
-            print('As more ice accumulates, it developes ridges which pose a large risk of causing issues to aerodynamic and instrument performance with up to a 500% increase in drag. It\'s thickness also makes it more difficult to remove using de-icing equipment.')
+            print('Clear ice is formed by supercooled large water droplets that mostly occur in the temperature range from 0 C to -10 C.\n  The ice itself freezes slowly upon impact forming a smooth sheet of transparent ice.\n Because the droplets are large, as they freeze, they spread over the surface, combining with other droplets, forming a solid surface. There are no air bubbles to weaken the structure of the ice layer. \n As more ice accumulates, it developes ridges which pose a large risk of causing issues to aerodynamic and instrument performance with up to a 500% increase in drag. It\'s thickness also makes it more difficult to remove using de-icing equipment.')
             print('')
             input('Press enter to continue.')
             clearing.clear()
             continue
         elif submenu_selection == 'Rime Ice':
-            print('Rime ice is a type of ice that occurs in the coldest conditions, usually below -15C. Rime ice is opaque or milky/white ice that occurs commonly in stratiform clouds. The supercooled water droplets ')
-            print('that form with rime ice are much smaller than that of clear ice. This means the droplets maintain the sperical shapes as they freeze without much spreading.')
+            print('Rime ice is a type of ice that occurs in the coldest conditions, usually below -15C. Rime ice is opaque or milky/white\n ice that occurs commonly in stratiform clouds. The supercooled water droplets \n that form with rime ice are much smaller than that of clear ice. This means the droplets maintain the sperical shapes as they freeze without much spreading.')
             print('')
             input('Press enter to continue.')
             clearing.clear()
             continue
         elif submenu_selection == 'Mixed Ice':
-            print('Mixed ice is the most common type of ice that may occur due to the varying nature of droplet sizes within a cloud. This type of ice is most commonly found in temperatures ranging from -10C to -15C.')
+            print('Mixed ice is the most common type of ice that may occur due to the varying nature of droplet sizes within a cloud.\n This type of ice is most commonly found in temperatures ranging from -10C to -15C.')
             print('')
             input('Press enter to continue.')
             clearing.clear()
@@ -141,7 +138,7 @@ while quitting == False:
             input('Press enter to continue.')
             clearing.clear()
             continue
-    if selection == 'Request Forecast':
+    if selection == 'Request 5-day Forecast':
             forecast_base_url = 'https://api.openweathermap.org/data/2.5/forecast?'
             api_key = 'f820095e8faeb3eb39572008bae7a59c'
             forecast_city = input('Which city in Australia do you want to know the forecast for? ')
