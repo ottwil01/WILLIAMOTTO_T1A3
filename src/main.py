@@ -54,10 +54,11 @@ while quitting == False:
         city = input('Which city in Australia are you flying out of? ')
         url = base_url + '&appid=' + api_key + '&q=' + city + '&units=imperial'
         response = requests.get(url).json()
-        if response['cod'] == '404':
+        if response['cod'] == '404' or response['cod'] == '400':
             city = input('That didn\'t work, please try again: ')
             url = base_url + '&appid=' + api_key + '&q=' + city + '&units=imperial'
             response = requests.get(url).json()
+        print(response)
 
         ground_temp = functions.f_to_c(response['main']['temp'])
         weather_description = response['weather'][0]['description']
@@ -66,13 +67,14 @@ while quitting == False:
         dew_point = ground_temp - ((100 - current_humidity) / 5)
         cloud_base = int(((ground_temp - dew_point) / 2.5) * 1000)
         cloud_base_temp = (-0.00984 * cloud_base) + ground_temp
-        alt_clear = int((10 + ground_temp) / 0.00984)
-        alt_mixed = int((15 + ground_temp) / 0.00984)
-        alt_rime = int((20 + ground_temp) / 0.00984)
+        alt_clear = int(cloud_base + 5000)
+        alt_mixed = int(cloud_base + 7500)
+        alt_rime = int(cloud_base + 10000)
         
         if weather_description != 'clear sky':
             ice_present = 'Yes'
             safe_zone = f'Safe to fly below {cloud_base} feet, or above {alt_rime} feet'
+
         else:
             ice_present = 'No'
             safe_zone = 'There is no potential for icing!'
