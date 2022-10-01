@@ -1,13 +1,13 @@
 # WILLIAMOTTO_T1A3
 
-youtube recording
+### [youtube recording]()
 
-[Colorama](https://pypi.org/project/colorama/)
-[Clearing](https://pypi.org/project/clearing/)
-[OpenWeatherMap API](https://openweathermap.org/api)
-[Prettytable](https://pypi.org/project/prettytable/)
-[Simpletermmenu](https://pypi.org/project/simple-term-menu/)
-[Datetime](https://docs.python.org/3/library/datetime.html)
+#### [Colorama](https://pypi.org/project/colorama/)
+#### [Clearing](https://pypi.org/project/clearing/)
+#### [OpenWeatherMap API](https://openweathermap.org/api)
+#### [Prettytable](https://pypi.org/project/prettytable/)
+#### [Simpletermmenu](https://pypi.org/project/simple-term-menu/)
+#### [Datetime](https://docs.python.org/3/library/datetime.html)
 
 # Statement and Purpose
 This weather app is designed to be used to help pilots identify potentially dangerous icing formations that exist in cloudy conditions.
