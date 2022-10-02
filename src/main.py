@@ -4,7 +4,6 @@ from prettytable import PrettyTable
 import clearing
 import datetime
 import functions
-import creds
 import colorama
 from colorama import Fore
 colorama.init(autoreset=True)
